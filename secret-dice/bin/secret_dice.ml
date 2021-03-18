@@ -17,10 +17,9 @@ let run () =
         None -> failwith "No input provided"
       | Some input_str ->
         let guess = Game.Guess (Dice.of_string_exn input_str) in
-        if List.mem valid_moves guess ~equal:(fun (Game.Guess d1) (Game.Guess d2) -> Dice.equal d1 d2) then
-          loop (Game.make_guess game guess)
-        else
-          failwith "Invalid input"
+        match Game.make_guess game guess with
+        | Error msg -> failwith msg
+        | Success game -> loop game
   in
   let game = Game.new_game () in
   loop game

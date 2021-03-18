@@ -8,6 +8,10 @@ type t =
     Unresolved of { valid_moves: guess list; secret: secret }
   | Resolved of score
 
+type guess_result =
+    Success of t
+  | Error of string
+
 val new_game: unit -> t
 
-val make_guess: t -> guess -> t
+val make_guess: t -> guess -> guess_result
