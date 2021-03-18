@@ -1,0 +1,6 @@
+(executables
+ (names secret_dice)
+ (libraries
+   base
+   stdio
+   secret_dice_lib))
