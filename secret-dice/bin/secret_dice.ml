@@ -13,12 +13,14 @@ let run () =
     match In_channel.input_line In_channel.stdin with
       None -> failwith "No input provided"
     | Some input_str ->
-      let guess = Game.Guess (Dice.of_string_exn input_str) in
-      match Game.make_guess game guess with
-      | InProgress game -> loop game
-      | Finished (Score score) -> printf "You won! Score: %d\n%!" score
-      | Error msg -> failwith msg
-
+      match Dice.of_string input_str with
+      | None -> failwith "Failed to parse input as dice"
+      | Some guessed_dice ->
+        let guess = Game.Guess guessed_dice in
+        match Game.make_guess game guess with
+        | InProgress game -> loop game
+        | Finished (Score score) -> printf "You won! Score: %d\n%!" score
+        | Error msg -> failwith msg
   in
   let game = Game.new_game () in
   loop game

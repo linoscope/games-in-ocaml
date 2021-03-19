@@ -1,4 +1,6 @@
-type t = One | Two | Three | Four | Five | Six [@@deriving compare, equal, show]
+open Base
+
+type t = One | Two | Three | Four | Five | Six [@@deriving equal]
 
 let to_int = function
     One -> 1
@@ -10,14 +12,15 @@ let to_int = function
 
 let to_string t = t |> to_int |> Int.to_string
 
-let of_int_exn = function
-  | 1 -> One
-  | 2 -> Two
-  | 3 -> Three
-  | 4 -> Four
-  | 5 -> Five
-  | 6 -> Six
-  | _ -> assert false
+let of_int = function
+  | 1 -> Some One
+  | 2 -> Some Two
+  | 3 -> Some Three
+  | 4 -> Some Four
+  | 5 -> Some Five
+  | 6 -> Some Six
+  | _ -> None
 
-let of_string_exn s =
-  int_of_string s |> of_int_exn
+let of_string s =
+  let open Option.Monad_infix in
+  Caml.int_of_string_opt s >>= of_int
