@@ -1,12 +1,10 @@
 open Base
 
-type secret = Dice.t
-
 type guess = Guess of Dice.t
 
 type score = Score of int
 
-type t = { secret: secret; valid_moves: guess list }
+type t = { secret: Dice.t; valid_moves: guess list }
 
 type guess_result =
     InProgress of t
@@ -21,6 +19,8 @@ let new_game () =
 
 let is_valid guess valid_moves =
   List.mem valid_moves guess ~equal:(fun (Guess d1) (Guess d2) -> Dice.equal d1 d2)
+
+let valid_moves t = t.valid_moves
 
 let make_guess {secret; valid_moves} guess =
   if not (is_valid guess valid_moves) then

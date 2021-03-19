@@ -4,13 +4,13 @@ open Secret_dice_lib
 
 let valid_moves_str valid_moves =
   valid_moves
-  |> List.map ~f:(fun(Game.Guess d) -> (Dice.to_string d))
+  |> List.map ~f:(fun (Game.Guess d) -> (Dice.to_string d))
   |> String.concat ~sep:", "
 
 let run () =
   printf "Starting game...\n";
   let rec loop game =
-    printf "Guess a number from the following: [%s]\n%!" (valid_moves_str game.Game.valid_moves);
+    printf "Guess a number from the following: [%s]\n%!" (valid_moves_str (Game.valid_moves game));
     match In_channel.input_line In_channel.stdin with
       None -> failwith "No input provided"
     | Some input_str ->
