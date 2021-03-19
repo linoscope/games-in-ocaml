@@ -10,7 +10,7 @@ let to_int = function
   | Five -> 5
   | Six -> 6
 
-let to_string t = t |> to_int |> Int.to_string
+let to_string t = t |> to_int |> Printf.sprintf "[%d]"
 
 let of_int = function
   | 1 -> Some One

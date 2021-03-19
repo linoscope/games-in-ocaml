@@ -4,7 +4,8 @@ open Secret_dice_lib
 
 let valid_moves_str valid_moves =
   valid_moves
-  |> List.fold ~init:"" ~f:(fun acc (Game.Guess d) -> acc ^ (Printf.sprintf "%d, " (Dice.to_int d)))
+  |> List.map ~f:(fun(Game.Guess d) -> (Dice.to_string d))
+  |> String.concat ~sep:", "
 
 let run () =
   printf "Starting game...\n";
