@@ -16,7 +16,8 @@ type guess_result =
 let new_game () =
   let all_dices =  Dice.[One; Two; Three; Four; Five; Six] in
   let valid_moves = List.map all_dices ~f:(fun d -> Guess d) in
-  { secret = List.random_element_exn all_dices; valid_moves; }
+  let secret = List.random_element_exn all_dices in
+  { secret; valid_moves; }
 
 let is_valid guess valid_moves =
   List.mem valid_moves guess ~equal:(fun (Guess d1) (Guess d2) -> Dice.equal d1 d2)
