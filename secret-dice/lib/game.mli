@@ -4,12 +4,11 @@ type score = Score of int
 
 type guess = Guess of Dice.t
 
-type t =
-    Unresolved of { valid_moves: guess list; secret: secret }
-  | Resolved of score
+type t = { secret: secret; valid_moves: guess list }
 
 type guess_result =
-    Success of t
+    InProgress of t
+  | Finished of score
   | Error of string
 
 val new_game: unit -> t
