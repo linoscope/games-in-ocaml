@@ -1,0 +1,5 @@
+(library
+ (name tic_tac_toe_lib)
+ (libraries base)
+ (inline_tests)
+ (preprocess (pps ppx_jane)))

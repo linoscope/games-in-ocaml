@@ -1,0 +1,4 @@
+(executable
+ (name tic_tac_toe)
+ (libraries tic_tac_toe_lib base stdio)
+)
