@@ -3,10 +3,10 @@ type t
 type winner = Winner of Player.t
 
 type move_result =
-    InProgress of t
+    In_progress of t
   | Finished of winner
   | Tied
-  | AlreadyPlaced
+  | Already_placed
 
 val initial: t
 

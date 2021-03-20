@@ -15,12 +15,12 @@ let run () =
       | Some pos ->
         let open Game in
         match move game pos with
-        | AlreadyPlaced -> failwith "Already placed"
         | Finished (Winner p) ->
           printf "Player %s won!\n" (Player.to_string p)
-        | InProgress new_game -> loop new_game
+        | In_progress new_game -> loop new_game
         | Tied -> printf "Tied!!\n"
+        | Already_placed -> failwith "Already placed"
   in
-  loop (Game.initial)
+  loop Game.initial
 
 let () = run ()

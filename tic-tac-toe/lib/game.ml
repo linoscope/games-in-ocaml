@@ -8,10 +8,10 @@ type t = {
 type winner = Winner of Player.t
 
 type move_result =
-    InProgress of t
+    In_progress of t
   | Finished of winner
   | Tied
-  | AlreadyPlaced
+  | Already_placed
 
 let initial = {
   turn = Player.O;
@@ -41,7 +41,7 @@ let lines_to_check = Position.rows @ Position.cols @ Position.diags
 
 let move {turn; board} pos =
   match Board.place board turn pos with
-    None -> AlreadyPlaced
+    None -> Already_placed
   | Some board ->
     let all_filled =
       Board.all_cells board
@@ -55,5 +55,5 @@ let move {turn; board} pos =
     in
     match (all_filled, line_filled_by) with
     | true, _ -> Tied
-    | false, None -> InProgress {board; turn = Player.rev turn}
+    | false, None -> In_progress {board; turn = Player.rev turn}
     | false, Some p -> Finished (Winner p)
