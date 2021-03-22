@@ -54,6 +54,7 @@ let move {turn; board} pos =
       |> List.hd
     in
     match (all_filled, line_filled_by) with
-    | true, _ -> Tied
-    | false, None -> In_progress {board; turn = Player.rev turn}
+    | true, Some p
     | false, Some p -> Finished (Winner p)
+    | true, None -> Tied
+    | false, None -> In_progress {board; turn = Player.rev turn}
